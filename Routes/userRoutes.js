@@ -1,19 +1,21 @@
 // Import necessary modules
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Assuming you have a User model
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User"); // Assuming you have a User model
 
 // Route for user registration (Sign up)
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
+    console.log(req.body);
+
     const { username, email, password } = req.body;
 
     // Check if the user already exists in the database
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     // Hash the password
@@ -23,47 +25,48 @@ router.post('/signup', async (req, res) => {
     const newUser = new User({
       username,
       email,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
     // Save the user to the database
-    await newUser.save();
+    let x = await newUser.save();
 
-    res.status(201).json({ message: 'User created successfully' });
+    console.log(x);
+
+    res.status(201).json({ message: "User created successfully" });
   } catch (error) {
-    console.error('Error in sign up:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    console.error("Error in sign up:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
 // Route for user login
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
     // Check if the user exists in the database
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     // Verify the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid password' });
+      return res.status(401).json({ message: "Invalid password" });
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, "your_secret_key", {
+      expiresIn: "1h",
+    });
 
-    res.status(200).json({ token });
+    res.status(200).json({message:"The login is succsseful"});
   } catch (error) {
-    console.error('Error in login:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    console.error("Error in login:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
 module.exports = router;
-
-
-
