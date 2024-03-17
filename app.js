@@ -1,28 +1,23 @@
 const mongoose = require("mongoose");
 const express = require("express");
 require('dotenv').config();
-
-
 const router = require("./Routes/userRoutes.js");
+
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 
-const PORT = 8585;
-const mongoURI="mongodb://localhost:27017";
-
+const PORT = process.env.PORT || 8585;
+const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017";
 
 app.use("/", router);
 
-
-//const mongoURI = "mongodb://localhost:27017";
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 
-
-   mongoose.connect(mongoURI, { ...options }) 
+mongoose.connect(mongoURI, { ...options })
   .then(() => {
     console.log('MongoDB connected');
     app.listen(PORT, () => {
@@ -33,8 +28,3 @@ const options = {
     console.error('MongoDB connection error:', err);
     process.exit(1);
   });
-
-
-
-
-

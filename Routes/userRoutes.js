@@ -1,9 +1,9 @@
-// Import necessary modules
+
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User"); // Assuming you have a User model
+const User = require("../models/User"); 
 
 // Route for user registration (Sign up)
 router.post("/signup", async (req, res) => {
