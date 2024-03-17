@@ -1,9 +1,8 @@
-
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User"); 
+const User = require("../models/User");
 
 // Route for user registration (Sign up)
 router.post("/signup", async (req, res) => {
@@ -33,7 +32,7 @@ router.post("/signup", async (req, res) => {
 
     console.log(x);
 
-    res.status(201).json({ message: "User created successfully" });
+    res.status(201).json({ token });
   } catch (error) {
     console.error("Error in sign up:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -62,7 +61,7 @@ router.post("/login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({message:"The login is succsseful"});
+    res.status(200).json({ token });
   } catch (error) {
     console.error("Error in login:", error);
     res.status(500).json({ message: "Internal server error" });
