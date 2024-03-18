@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const verifyJWT = require("../utils/verification");
 const Movie = require("../models/Movie");
 
 // Route for user registration (Sign up)
@@ -35,7 +36,7 @@ router.post("/signup", async (req, res) => {
     let user = await newUser.save();
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, "your_secret_key", {
+    const token = jwt.sign({ userId: user._id }, process.env.secret, {
       expiresIn: "1h",
     });
     res.status(201).json({ token });
@@ -63,7 +64,7 @@ router.post("/login", async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, "your_secret_key", {
+    const token = jwt.sign({ userId: user._id }, process.env.secret, {
       expiresIn: "1h",
     });
 
@@ -74,6 +75,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/protected", verifyJWT, (req, res) => {
+  // Access user data from req.user if attached
+  console.log("User:", req.user);
+  // Handle the request logic for protected resource
+  res.send("This is a protected resource!");
+});
+router.get("/unprotected", (req, res) => {
+  res.send("This is a unprotected resource!");
 router.post("/saveMovies", async (req, res) => {
   try {
     const moviesData = require("../data/movies.json"); // Assuming your JSON file is named movies.json and is located in the data directory
