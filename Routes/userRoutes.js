@@ -9,12 +9,15 @@ router.post("/signup", async (req, res) => {
   try {
     console.log(req.body);
 
-    const { username, email, password } = req.body;
+    const { username, email, password, confirmedPassword } = req.body;
 
     // Check if the user already exists in the database
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
+    }
+    if(password!==confirmedPassword){
+      return res.status(400).json({message:"passwords are not matched"})
     }
 
     // Hash the password
@@ -32,7 +35,7 @@ router.post("/signup", async (req, res) => {
 
     console.log(x);
 
-    res.status(201).json({ token });
+    res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error("Error in sign up:", error);
     res.status(500).json({ message: "Internal server error" });
