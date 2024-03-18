@@ -84,39 +84,40 @@ router.get("/protected", verifyJWT, (req, res) => {
 router.get("/unprotected", (req, res) => {
   res.send("This is a unprotected resource!");
 });
-router.post("/saveMovies", async (req, res) => {
-  try {
-    const moviesData = require("../data/movies.json"); // Assuming your JSON file is named movies.json and is located in the data directory
 
-    // Loop through the movies data and save each movie to the database
-    for (const movie of moviesData) {
+// router.post("/saveMovies", async (req, res) => {
+//   try {
+//     const moviesData = require("../data/movies.json"); // Assuming your JSON file is named movies.json and is located in the data directory
+
+//     // Loop through the movies data and save each movie to the database
+//     for (const movie of moviesData) {
       
-      const newMovie = new Movie({
-        title: movie.Title,
-        year: movie.Year,
-        rated: movie.Rated,
-        releasedDated: movie.Released,
-        runtime: movie.Runtime,
-        genre: movie.Genre,
-        director: movie.Director,
-        actors: movie.Actors,
-        language: movie.Language,
-        country: movie.Country,
-        award: movie.Awards,
-        poster: movie.Poster,
-        imdbIDRating: movie.imdbRating,
-        imdbID: movie.imdbID,
-        images:movie.Images
-      });
+//       const newMovie = new Movie({
+//         title: movie.Title,
+//         year: movie.Year,
+//         rated: movie.Rated,
+//         releasedDated: movie.Released,
+//         runtime: movie.Runtime,
+//         genre: movie.Genre,
+//         director: movie.Director,
+//         actors: movie.Actors,
+//         language: movie.Language,
+//         country: movie.Country,
+//         award: movie.Awards,
+//         poster: movie.Poster,
+//         imdbIDRating: movie.imdbRating,
+//         imdbID: movie.imdbID,
+//         images:movie.Images
+//       });
 
-      await newMovie.save();
-    }
+//       await newMovie.save();
+//     }
 
-    res.status(200).json({ message: "Movies saved successfully" });
-  } catch (error) {
-    console.error("Error in saving movies:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
+//     res.status(200).json({ message: "Movies saved successfully" });
+//   } catch (error) {
+//     console.error("Error in saving movies:", error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
 
 module.exports = router;

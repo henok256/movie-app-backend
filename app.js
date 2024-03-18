@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const express = require("express");
 const app = express();
+const uploadMovies =require('./utils/dataUpload.js');
 require("dotenv").config();
 
 app.use(cors());
@@ -19,6 +20,7 @@ mongoose
   .connect(mongoURI)
   .then(() => {
     console.log("MongoDB connected");
+    uploadMovies();
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
