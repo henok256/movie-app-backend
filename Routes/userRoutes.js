@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const verifyJWT = require("../utils/verification");
 
 // Route for user registration (Sign up)
 router.post("/signup", async (req, res) => {
@@ -16,8 +17,8 @@ router.post("/signup", async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
-    if(password!==confirmedPassword){
-      return res.status(400).json({message:"passwords are not matched"})
+    if (password !== confirmedPassword) {
+      return res.status(400).json({ message: "passwords are not matched" });
     }
 
     // Hash the password
@@ -31,14 +32,13 @@ router.post("/signup", async (req, res) => {
     });
 
     // Save the user to the database
-     let user = await newUser.save();
+    let user = await newUser.save();
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, "your_secret_key", {
+    const token = jwt.sign({ userId: user._id }, process.env.secret, {
       expiresIn: "1h",
     });
     res.status(201).json({ token });
-    
   } catch (error) {
     console.error("Error in sign up:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, "your_secret_key", {
+    const token = jwt.sign({ userId: user._id }, process.env.secret, {
       expiresIn: "1h",
     });
 
@@ -72,6 +72,16 @@ router.post("/login", async (req, res) => {
     console.error("Error in login:", error);
     res.status(500).json({ message: "Internal server error" });
   }
+});
+
+router.get("/protected", verifyJWT, (req, res) => {
+  // Access user data from req.user if attached
+  console.log("User:", req.user);
+  // Handle the request logic for protected resource
+  res.send("This is a protected resource!");
+});
+router.get("/unprotected", (req, res) => {
+  res.send("This is a unprotected resource!");
 });
 
 module.exports = router;
