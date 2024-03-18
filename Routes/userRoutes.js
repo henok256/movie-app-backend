@@ -85,7 +85,7 @@ router.get("/unprotected", (req, res) => {
   res.send("This is a unprotected resource!");
 });
 
-router.get("/search", async (req, res) => {
+router.get("/search",verifyJWT, async (req, res) => {
   try {
     const { title, year, genre, director, imdbIDRating } = req.query;
 
@@ -113,7 +113,7 @@ router.get("/search", async (req, res) => {
   }
 });
 
-router.post("/add", async (req, res, next) => {
+router.post("/add", verifyJWT, async (req, res, next) => {
   try{
     const {
     title,
@@ -147,6 +147,28 @@ router.post("/add", async (req, res, next) => {
   res.status(500).json({ message: "Internal server error" });
   }
 });
+
+router.put("/update/:id",async  (req, res)=>{
+     try{
+      const id=req.params.id;
+      const upDatedData= req.body;
+      const updateMovie= await Movie.findByIdAndUpdate(id, upDatedData, {
+                  new:true,
+      });
+      
+      if(!updateMovie){
+        return res.status(404).json({ message: "Movie not found" });
+      }
+
+      res.status(200).json(updateMovie)
+    
+     } catch(error){
+      console.error("Error updating movie:", error);
+    res.status(500).json({ message: "Internal server error" });
+
+     }
+     
+})
 
 
 module.exports = router;
