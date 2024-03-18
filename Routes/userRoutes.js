@@ -85,4 +85,68 @@ router.get("/unprotected", (req, res) => {
   res.send("This is a unprotected resource!");
 });
 
+router.get("/search", async (req, res) => {
+  try {
+    const { title, year, genre, director, imdbIDRating } = req.query;
+
+    // Construct the search query
+    const searchQuery = {};
+    if (title) searchQuery.title = title;
+    if (year) searchQuery.year = year;
+    if (genre) searchQuery.genre = genre;
+    if (director) searchQuery.director = director;
+    if (imdbIDRating) searchQuery.imdbIDRating = imdbIDRating;
+
+    // Find movies based on the search query
+    const movies = await Movie.find(searchQuery);
+
+    // If no movies are found, return a message
+    if (!movies || movies.length === 0) {
+      return res.status(404).json({ message: "No movies found" });
+    }
+
+    // Return the found movies
+    res.status(200).json(movies);
+  } catch (error) {
+    console.error("Error in searching movies:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.post("/add", async (req, res, next) => {
+  try{
+    const {
+    title,
+    year,
+    rated,
+    runtime,
+    genre,
+    director,
+    actors,
+    country,
+    poster,
+    images,
+  } = req.body;
+  const newMovie = new Movie({
+    title: title,
+    year: year,
+    rated: rated,
+    runtime: runtime,
+    genre: genre,
+    director: director,
+    actors: actors,
+    country: country,
+    poster: poster,
+    images: images,
+  });
+
+  await newMovie.save();
+  res.status(201).json({ message: "Movie added successfully" });
+}catch(error){
+  console.error("Error adding movie:", error);
+  res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
 module.exports = router;
