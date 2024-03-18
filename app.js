@@ -15,13 +15,8 @@ const mongoURI = process.env.mongoURI.toString();
 
 app.use("/", router);
 
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
-
 mongoose
-  .connect(mongoURI, { ...options })
+  .connect(mongoURI)
   .then(() => {
     console.log("MongoDB connected");
     app.listen(PORT, () => {
