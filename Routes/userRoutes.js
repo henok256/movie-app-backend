@@ -28,9 +28,14 @@ router.post("/signup", async (req, res) => {
     });
 
     // Save the user to the database
-    let x = await newUser.save();
+    let user = await newUser.save();
 
-    console.log(x);
+    // Generate JWT token
+    const token = jwt.sign({ userId: user._id }, "your_secret_key", {
+      expiresIn: "1h",
+    });
+
+    console.log(user);
 
     res.status(201).json({ token });
   } catch (error) {
