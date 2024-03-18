@@ -83,6 +83,7 @@ router.get("/protected", verifyJWT, (req, res) => {
 });
 router.get("/unprotected", (req, res) => {
   res.send("This is a unprotected resource!");
+});
 router.post("/saveMovies", async (req, res) => {
   try {
     const moviesData = require("../data/movies.json"); // Assuming your JSON file is named movies.json and is located in the data directory
