@@ -91,10 +91,10 @@ router.get("/search", async (req, res) => {
 
     // Construct the search query
     const searchQuery = {};
-    if (title) searchQuery.title = title;
+    if (title) searchQuery.title = { $regex: title };
     if (year) searchQuery.year = year;
-    if (genre) searchQuery.genre = genre;
-    if (director) searchQuery.director = director;
+    if (genre) searchQuery.genre = { $regex: genre };
+    if (director) searchQuery.director = { $regex: director };
     if (imdbIDRating) searchQuery.imdbIDRating = imdbIDRating;
 
     // Find movies based on the search query
@@ -104,8 +104,8 @@ router.get("/search", async (req, res) => {
     if (!movies || movies.length === 0) {
       return res.status(404).json({ message: "No movies found" });
     }
-    if(!number){
-      number=movies.length;
+    if (!number) {
+      number = movies.length;
     }
 
     // Return the found movies
