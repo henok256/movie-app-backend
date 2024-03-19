@@ -104,6 +104,9 @@ router.get("/search", async (req, res) => {
     if (!movies || movies.length === 0) {
       return res.status(404).json({ message: "No movies found" });
     }
+    if(!number){
+      number=movies.length;
+    }
 
     // Return the found movies
     res.status(200).json(movies.splice(0, number));
