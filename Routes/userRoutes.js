@@ -85,9 +85,9 @@ router.get("/unprotected", (req, res) => {
   res.send("This is a unprotected resource!");
 });
 
-router.get("/search",verifyJWT, async (req, res) => {
+router.get("/search", async (req, res) => {
   try {
-    const { title, year, genre, director, imdbIDRating } = req.query;
+    const { number, title, year, genre, director, imdbIDRating } = req.query;
 
     // Construct the search query
     const searchQuery = {};
@@ -106,7 +106,7 @@ router.get("/search",verifyJWT, async (req, res) => {
     }
 
     // Return the found movies
-    res.status(200).json(movies);
+    res.status(200).json(movies.splice(0, number));
   } catch (error) {
     console.error("Error in searching movies:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -114,61 +114,67 @@ router.get("/search",verifyJWT, async (req, res) => {
 });
 
 router.post("/add", verifyJWT, async (req, res, next) => {
-  try{
+  try {
     const {
-    title,
-    year,
-    rated,
-    runtime,
-    genre,
-    director,
-    actors,
-    country,
-    poster,
-    images,
-  } = req.body;
-  const newMovie = new Movie({
-    title: title,
-    year: year,
-    rated: rated,
-    runtime: runtime,
-    genre: genre,
-    director: director,
-    actors: actors,
-    country: country,
-    poster: poster,
-    images: images,
-  });
+      title,
+      year,
+      rated,
+      runtime,
+      genre,
+      director,
+      actors,
+      country,
+      poster,
+      images,
+    } = req.body;
+    const newMovie = new Movie({
+      title: title,
+      year: year,
+      rated: rated,
+      runtime: runtime,
+      genre: genre,
+      director: director,
+      actors: actors,
+      country: country,
+      poster: poster,
+      images: images,
+    });
 
-  await newMovie.save();
-  res.status(201).json({ message: "Movie added successfully" });
-}catch(error){
-  console.error("Error adding movie:", error);
-  res.status(500).json({ message: "Internal server error" });
+    await newMovie.save();
+    res.status(201).json({ message: "Movie added successfully" });
+  } catch (error) {
+    console.error("Error adding movie:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
-router.put("/update/:id",async  (req, res)=>{
-     try{
-      const id=req.params.id;
-      const upDatedData= req.body;
-      const updateMovie= await Movie.findByIdAndUpdate(id, upDatedData, {
-                  new:true,
-      });
-      
-      if(!updateMovie){
-        return res.status(404).json({ message: "Movie not found" });
-      }
+router.put("/update/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const upDatedData = req.body;
+    const updateMovie = await Movie.findByIdAndUpdate(id, upDatedData, {
+      new: true,
+    });
 
-      res.status(200).json(updateMovie)
-    
-     } catch(error){
-      console.error("Error updating movie:", error);
+    if (!updateMovie) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+
+    res.status(200).json(updateMovie);
+  } catch (error) {
+    console.error("Error updating movie:", error);
     res.status(500).json({ message: "Internal server error" });
-
-     }
-     
-})
-
+  }
+});
+router.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await Movie.findByIdAndDelete(id);
+    res.send("Deletion of the movie is successful");
+  } catch (error) {
+    console.log("Unable to delete", error);
+    res.status(500).json({ message: "Internal Error" });
+  }
+});
 
 module.exports = router;
