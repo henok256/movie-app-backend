@@ -87,7 +87,7 @@ router.get("/unprotected", (req, res) => {
 
 router.get("/search", async (req, res) => {
   try {
-    const { number, title, year, genre, director, imdbIDRating } = req.query;
+    let { number, title, year, genre, director, imdbIDRating } = req.query;
 
     // Construct the search query
     const searchQuery = {};
