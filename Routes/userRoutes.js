@@ -116,6 +116,29 @@ router.get("/search", async (req, res) => {
   }
 });
 
+router.get("/singleMovie", async (req, res) => {
+  try {
+    let { title } = req.query;
+
+    // Construct the search query
+    const searchQuery = {};
+    if (title) searchQuery.title = title;
+    // Find movies based on the search query
+    const movies = await Movie.find(searchQuery);
+
+    // If no movies are found, return a message
+    if (!movies || movies.length === 0) {
+      return res.status(404).json({ message: "No movies found" });
+    }
+
+    // Return the found movies
+    res.status(200).json(movies.splice(0, 1));
+  } catch (error) {
+    console.error("Error in searching movies:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 router.post("/add", verifyJWT, async (req, res, next) => {
   try {
     const {
