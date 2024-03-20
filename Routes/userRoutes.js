@@ -91,10 +91,10 @@ router.get("/search", async (req, res) => {
 
     // Construct the search query
     const searchQuery = {};
-    if (title) searchQuery.title = { $regex: title };
+    if (title) searchQuery.title = { $regex: new RegExp(title, "i") };
     if (year) searchQuery.year = year;
-    if (genre) searchQuery.genre = { $regex: genre };
-    if (director) searchQuery.director = { $regex: director };
+    if (genre) searchQuery.genre = { $regex: new RegExp(genre, "i") };
+    if (director) searchQuery.director = { $regex: new RegExp(director, "i") };
     if (imdbIDRating) searchQuery.imdbIDRating = imdbIDRating;
 
     // Find movies based on the search query
