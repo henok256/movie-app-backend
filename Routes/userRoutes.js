@@ -30,7 +30,7 @@ router.post("/signup", async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      role:"customer"
+      role: "customer",
     });
 
     // Save the user to the database
@@ -47,14 +47,12 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.get('/users', async (req, res) => {
-
+router.get("/users", async (req, res) => {
   try {
     const users = await User.find({});
-    if (users.length > 0) { 
+    if (users.length > 0) {
       return res.status(200).json({ users });
-    } 
-    else {
+    } else {
       return res.status(404).json({ message: "No users found" });
     }
   } catch (error) {
@@ -62,8 +60,6 @@ router.get('/users', async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
-
 
 // Route for user login
 router.post("/login", async (req, res) => {
@@ -87,7 +83,7 @@ router.post("/login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token });
+    res.status(200).json({ token: token, role: user.role });
   } catch (error) {
     console.error("Error in login:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -103,12 +99,6 @@ router.get("/protected", verifyJWT, (req, res) => {
 router.get("/unprotected", (req, res) => {
   res.send("This is a unprotected resource!");
 });
-
-
-
-
-
-
 
 router.put("/update/:id", async (req, res) => {
   try {
