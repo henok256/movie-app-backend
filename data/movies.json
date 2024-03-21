@@ -20,7 +20,7 @@
       "imdbID": "tt0499549",
       "Type": "movie",
       "Response": "True",
-      "trailer": "https://www.youtube.com/watch?v=5PSNL1qE6VY",
+      "trailer": "https://www.youtube.com/embed/5PSNL1qE6VY?si=yhyXHyDt-7xkr9oX",
       "Images": [
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjEyOTYyMzUxNl5BMl5BanBnXkFtZTcwNTg0MTUzNA@@._V1_SX1500_CR0,0,1500,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BNzM2MDk3MTcyMV5BMl5BanBnXkFtZTcwNjg0MTUzNA@@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
@@ -50,7 +50,7 @@
       "imdbID": "tt0480249",
       "Type": "movie",
       "Response": "True",
-      "trailer": "https://www.youtube.com/watch?v=dtKMEAXyPkg",
+      "trailer": "https://www.youtube.com/embed/dtKMEAXyPkg?si=zXjMyVL2ideFnbbA",
       "Images": [
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTI0NTI4NjE3NV5BMl5BanBnXkFtZTYwMDA0Nzc4._V1_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTIwMDg2MDU4M15BMl5BanBnXkFtZTYwMTA0Nzc4._V1_.jpg",
@@ -79,7 +79,7 @@
       "imdbID": "tt0416449",
       "Type": "movie",
       "Response": "True",
-      "trailer": "https://www.youtube.com/watch?v=UrIbxk7idYA",
+      "trailer": "https://www.youtube.com/embed/UrIbxk7idYA?si=1sE89gwsN-_WEW8M",
       "Images": [
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMwNTg5MzMwMV5BMl5BanBnXkFtZTcwMzA2NTIyMw@@._V1_SX1777_CR0,0,1777,937_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTQwNTgyNTMzNF5BMl5BanBnXkFtZTcwNDA2NTIyMw@@._V1_SX1777_CR0,0,1777,935_AL_.jpg",
@@ -107,7 +107,7 @@
       "imdbID": "tt0848228",
       "Type": "movie",
       "Response": "True",
-      "trailer": "https://www.youtube.com/watch?v=eOrNdBpGMv8",
+      "trailer": "https://www.youtube.com/embed/eOrNdBpGMv8?si=wXP_B00cbVx7erO2",
        "Images": [
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTA0NjY0NzE4OTReQTJeQWpwZ15BbWU3MDczODg2Nzc@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjE1MzEzMjcyM15BMl5BanBnXkFtZTcwNDM4ODY3Nw@@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
@@ -137,7 +137,7 @@
       "imdbID": "tt0993846",
       "Type": "movie",
       "Response": "True",
-      "trailer": "https://www.youtube.com/watch?v=iszwuX1AK6A",
+      "trailer": "https://www.youtube.com/embed/iszwuX1AK6A?si=Y5jLrihyLKe4NQKm",
       "Images": [
         "https://images-na.ssl-images-amazon.com/images/M/MV5BNDIwMDIxNzk3Ml5BMl5BanBnXkFtZTgwMTg0MzQ4MDE@._V1_SX1500_CR0,0,1500,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0NzAxODAyMl5BMl5BanBnXkFtZTgwMDg0MzQ4MDE@._V1_SX1500_CR0,0,1500,999_AL_.jpg",
@@ -167,7 +167,7 @@
       "imdbID": "tt0816692",
       "Type": "movie",
       "Response": "True",
-      "trailer": "https://www.youtube.com/watch?v=2LqzF5WauAw",
+      "trailer": "https://www.youtube.com/embed/2LqzF5WauAw?si=2DvR3pR_rgb7ZIU_",
       "Images": [
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjA3NTEwOTMxMV5BMl5BanBnXkFtZTgwMjMyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMzQ5ODE2MzEwM15BMl5BanBnXkFtZTgwMTMyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg",
@@ -198,7 +198,7 @@
       "Type": "series",
       "totalSeasons": "7",
       "Response": "True",
-      "trailer": "https://www.youtube.com/watch?v=J7JYw5kQg_Y",
+      "trailer": "https://www.youtube.com/embed/J7JYw5kQg_Y?si=FEkj6Ibl5C8sFiMD",
       "Images": [
         "https://images-na.ssl-images-amazon.com/images/M/MV5BNDc1MGUyNzItNWRkOC00MjM1LWJjNjMtZTZlYWIxMGRmYzVlXkEyXkFqcGdeQXVyMzU3MDEyNjk@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BZjZkN2M5ODgtMjQ2OC00ZjAxLWE1MjMtZDE0OTNmNGM0NWEwXkEyXkFqcGdeQXVyNjUxNzgwNTE@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
@@ -229,7 +229,7 @@
       "Type": "series",
       "totalSeasons": "5",
       "Response": "True",
-      "trailer": "https://www.youtube.com/watch?v=9GgxinPwAGc",
+      "trailer": "https://www.youtube.com/embed/9GgxinPwAGc?si=zUQMjcm6TCQB_Yjm",
       "Images": [
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjM5MTM1ODUxNV5BMl5BanBnXkFtZTgwNTAzOTI2ODE@._V1_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BNzU2NDcxODMyOF5BMl5BanBnXkFtZTgwNDAzOTI2ODE@._V1_.jpg",
