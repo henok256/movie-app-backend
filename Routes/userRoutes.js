@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const userRouter = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
@@ -7,7 +7,7 @@ const verifyJWT = require("../utils/verification");
 const Movie = require("../models/Movie");
 
 // Route for user registration (Sign up)
-router.post("/signup", async (req, res) => {
+userRouter.post("/signup", async (req, res) => {
   try {
     console.log(req.body);
 
@@ -47,7 +47,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.get("/users", async (req, res) => {
+userRouter.get("/users", async (req, res) => {
   try {
     const users = await User.find({});
     if (users.length > 0) {
@@ -62,7 +62,7 @@ router.get("/users", async (req, res) => {
 });
 
 // Route for user login
-router.post("/login", async (req, res) => {
+userRouter.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -90,17 +90,17 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/protected", verifyJWT, (req, res) => {
+userRouter.get("/protected", verifyJWT, (req, res) => {
   // Access user data from req.user if attached
   console.log("User:", req.user);
   // Handle the request logic for protected resource
   res.send("This is a protected resource!");
 });
-router.get("/unprotected", (req, res) => {
+userRouter.get("/unprotected", (req, res) => {
   res.send("This is a unprotected resource!");
 });
 
-router.put("/update/:id", async (req, res) => {
+userRouter.put("/update/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const upDatedData = req.body;
@@ -119,4 +119,4 @@ router.put("/update/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = userRouter;
