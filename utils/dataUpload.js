@@ -30,7 +30,8 @@ const  uploadMovies=  (async ()=> {
             poster: movie.Poster,
             imdbIDRating: movie.imdbRating,
             imdbID: movie.imdbID,
-            images:movie.Images
+            images:movie.Images,
+            trailer:movie.trailer
           });
     
           newMovie.save();

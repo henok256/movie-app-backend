@@ -70,6 +70,11 @@ const movieSchema = new mongoose.Schema({
     required: false,
   
   },
+  trailer:{
+    type:String,
+    required:false,
+
+  },
   imdbID: {
     type: String,
     required: false,
