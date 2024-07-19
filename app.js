@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const express = require("express");
 const app = express();
+app.disable('x-powered-by')
 const uploadMovies = require("./utils/dataUpload.js");
 require("dotenv").config();
 
